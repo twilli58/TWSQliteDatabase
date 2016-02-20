@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Database</string>
+    <string name="productID">Product ID</string>
+    <string name="notAssigned">Not assigned</string>
+    <string name="productName">Product name</string>
+    <string name="productQuantity">Product Quantity</string>
+</resources>
