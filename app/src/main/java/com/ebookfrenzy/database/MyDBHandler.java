@@ -96,4 +96,17 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
         return result;
     }
+
+    public boolean updateProduct(String id, String productname, String quantity) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_PRODUCTNAME, productname);
+        values.put(COLUMN_QUANTITY, quantity);
+        return db.update(TABLE_PRODUCTS, values, COLUMN_ID + "=" +  COLUMN_ID, null) >0;
+
+    }
+    public boolean deleteAllProducts(String s) {
+
+        return false;
+    }
 }
