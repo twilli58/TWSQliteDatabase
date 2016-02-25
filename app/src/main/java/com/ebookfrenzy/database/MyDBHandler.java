@@ -101,7 +101,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public boolean updateProduct(String id, String productname, String quantity) {
 
         boolean result = false;
-        String query = "Select * FROM " + TABLE_PRODUCTS + " WHERE " + COLUMN_PRODUCTNAME + " =  \"" + productname + "\"";
+        if(productname.length() == 0 || quantity.length() == 0) return false;
+        String query = "Select * FROM " + TABLE_PRODUCTS + " WHERE " + COLUMN_ID + " =  \"" + id + "\"";
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.rawQuery(query, null);
@@ -124,25 +125,14 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         boolean result = false;
 
-        String query = "SELECT * FROM " + TABLE_PRODUCTS + " WHERE " + COLUMN_ID + " =  \"" + id + "\"";
         SQLiteDatabase db = this.getWritableDatabase();
+        try {
+            db.execSQL("delete from " + TABLE_PRODUCTS);
+            result = true;
+        } catch (SQLException e) {
 
-        Cursor cursor = db.rawQuery(query, null);
-
-        Product product = new Product();
-
-        if (cursor.moveToFirst()) {
-            try {
-                product.setID(Integer.parseInt(cursor.getString(0)));
-                db.execSQL("delete from " + TABLE_PRODUCTS);
-                //db.delete(MyDBHandler.TABLE_PRODUCTS, null, null);
-                cursor.close();
-                result = true;
-            } catch (SQLException e) {
-
-            }
         }
         db.close();
         return result;
     }
- }
+}
