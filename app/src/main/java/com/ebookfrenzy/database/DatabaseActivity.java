@@ -85,14 +85,14 @@ public class DatabaseActivity extends AppCompatActivity {
        MyDBHandler dbHandler = new MyDBHandler(this, null,
                 null, 1);
 
-        boolean result = dbHandler.deleteAllProducts(
-                productBox.getText().toString());
+        boolean result = dbHandler.deleteAllProducts(idView.getText().toString(),
+                productBox.getText().toString(), quantityBox.getText().toString());
 
         if (result) {
             idView.setText("Records Deleted");
             productBox.setText("");
             quantityBox.setText("");
         } else
-            idView.setText("No Match Found");
+            idView.setText("Not Deleted");
     }
 }
